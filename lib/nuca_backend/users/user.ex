@@ -10,6 +10,7 @@ defmodule NucaBackend.Users.User do
     field :phone, :string
     field :role, :string
     field :username, :string
+    field :password, :string, virtual: true
     # has_many :cats
     # has_many :hotspot
 
@@ -19,10 +20,23 @@ defmodule NucaBackend.Users.User do
   @doc false
   def changeset(user, attrs) do
     user
-    |> cast(attrs, [:role, :full_name, :phone, :email, :username, :password_hash, :inactive_since])
-    |> validate_required([
+    |> cast(attrs, [
       :role,
       :full_name
     ])
+    |> validate_required([
+      :role,
+      :full_name,
+      :phone,
+      :email,
+      :username,
+      :password_hash,
+      :inactive_since,
+      :password
+    ])
+    |> validate_length(:password, min: 8, max: 20)
+    |> validate_format(:email, ~r/.*@.*/)
+    |> unique_constraint(:email, name: :unique_email)
+    |> unique_constraint(:username, name: :unique_username)
   end
 end
