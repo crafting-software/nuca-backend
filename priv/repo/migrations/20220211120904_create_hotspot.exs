@@ -2,8 +2,7 @@ defmodule NucaBackend.Repo.Migrations.CreateHotspot do
   use Ecto.Migration
 
   def change do
-    create table(:hotspot, primary_key: false) do
-      add(:id, :binary_id, primary_key: true)
+    create table(:hotspot) do
       add :latitude, :string
       add :longitude, :string
       add :street_name, :string
