@@ -23,10 +23,6 @@ defmodule NucaBackend.Users.User do
     |> validate_required([
       :role,
       :full_name
-      # :phone,
-      # :email,
-      # :username,
-      # :password_hash,
     ])
   end
 end

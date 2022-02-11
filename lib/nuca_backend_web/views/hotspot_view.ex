@@ -10,7 +10,7 @@ defmodule NucaBackendWeb.HotspotView do
 
   def render("hotspot_details.json", %{hotspot: hotspot}) do
     sterilized_cats = Enum.filter(hotspot.cats, fn cat -> cat.is_sterilized == true end)
-    unsterilized_cats = Enum.filter(hotspot.cats, fn cat -> cat.is_sterilized == false end)
+    unsterilized_cats = hotspot.cats -- sterilized_cats
 
     hotspot
     |> Map.from_struct()
