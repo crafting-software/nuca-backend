@@ -21,7 +21,7 @@ defmodule NucaBackend.HotspotsTest do
     end
 
     test "create_hotspot/1 with valid data creates a hotspot" do
-      valid_attrs = %{city: "some city", contact_name: "some contact_name", contact_phone: "some contact_phone", inactive_since: ~N[2022-02-10 12:09:00], latitude: "some latitude", longitude: "some longitude", notes: "some notes", status: "some status", street_name: "some street_name", street_number: "some street_number", total_unsterilized_cats: 42, zip: "some zip"}
+      valid_attrs = %{city: "some city", contact_name: "some contact_name", contact_phone: "some contact_phone", inactive_since: ~N[2022-02-10 12:09:00], latitude: "some latitude", longitude: "some longitude", notes: "some notes", status: "ToDo", street_name: "some street_name", street_number: "some street_number", total_unsterilized_cats: 42, zip: "some zip"}
 
       assert {:ok, %Hotspot{} = hotspot} = Hotspots.create_hotspot(valid_attrs)
       assert hotspot.city == "some city"
@@ -31,7 +31,7 @@ defmodule NucaBackend.HotspotsTest do
       assert hotspot.latitude == "some latitude"
       assert hotspot.longitude == "some longitude"
       assert hotspot.notes == "some notes"
-      assert hotspot.status == "some status"
+      assert hotspot.status == "ToDo"
       assert hotspot.street_name == "some street_name"
       assert hotspot.street_number == "some street_number"
       assert hotspot.total_unsterilized_cats == 42
@@ -44,7 +44,7 @@ defmodule NucaBackend.HotspotsTest do
 
     test "update_hotspot/2 with valid data updates the hotspot" do
       hotspot = hotspot_fixture()
-      update_attrs = %{city: "some updated city", contact_name: "some updated contact_name", contact_phone: "some updated contact_phone", inactive_since: ~N[2022-02-11 12:09:00], latitude: "some updated latitude", longitude: "some updated longitude", notes: "some updated notes", status: "some updated status", street_name: "some updated street_name", street_number: "some updated street_number", total_unsterilized_cats: 43, zip: "some updated zip"}
+      update_attrs = %{city: "some updated city", contact_name: "some updated contact_name", contact_phone: "some updated contact_phone", inactive_since: ~N[2022-02-11 12:09:00], latitude: "some updated latitude", longitude: "some updated longitude", notes: "some updated notes", status: "InProgress", street_name: "some updated street_name", street_number: "some updated street_number", total_unsterilized_cats: 43, zip: "some updated zip"}
 
       assert {:ok, %Hotspot{} = hotspot} = Hotspots.update_hotspot(hotspot, update_attrs)
       assert hotspot.city == "some updated city"
@@ -54,7 +54,7 @@ defmodule NucaBackend.HotspotsTest do
       assert hotspot.latitude == "some updated latitude"
       assert hotspot.longitude == "some updated longitude"
       assert hotspot.notes == "some updated notes"
-      assert hotspot.status == "some updated status"
+      assert hotspot.status == "InProgress"
       assert hotspot.street_name == "some updated street_name"
       assert hotspot.street_number == "some updated street_number"
       assert hotspot.total_unsterilized_cats == 43

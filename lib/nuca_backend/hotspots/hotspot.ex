@@ -38,7 +38,7 @@ defmodule NucaBackend.Hotspots.Hotspot do
       :inactive_since,
       :total_unsterilized_cats
     ])
-    |> validate_required([:latitude])
+    |> validate_required([:latitude, :longitude, :street_name])
     |> validate_inclusion(:status, ["ToDo", "InProgress", "Done"])
   end
 end

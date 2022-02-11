@@ -18,7 +18,7 @@ defmodule NucaBackend.HotspotsFixtures do
         latitude: "some latitude",
         longitude: "some longitude",
         notes: "some notes",
-        status: "some status",
+        status: "ToDo",
         street_name: "some street_name",
         street_number: "some street_number",
         total_unsterilized_cats: 42,

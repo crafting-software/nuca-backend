@@ -3,8 +3,8 @@ defmodule NucaBackendWeb.HotspotControllerTest do
 
   import NucaBackend.HotspotsFixtures
 
-  @create_attrs %{city: "some city", contact_name: "some contact_name", contact_phone: "some contact_phone", inactive_since: ~N[2022-02-10 12:09:00], latitude: "some latitude", longitude: "some longitude", notes: "some notes", status: "some status", street_name: "some street_name", street_number: "some street_number", total_unsterilized_cats: 42, zip: "some zip"}
-  @update_attrs %{city: "some updated city", contact_name: "some updated contact_name", contact_phone: "some updated contact_phone", inactive_since: ~N[2022-02-11 12:09:00], latitude: "some updated latitude", longitude: "some updated longitude", notes: "some updated notes", status: "some updated status", street_name: "some updated street_name", street_number: "some updated street_number", total_unsterilized_cats: 43, zip: "some updated zip"}
+  @create_attrs %{city: "some city", contact_name: "some contact_name", contact_phone: "some contact_phone", inactive_since: ~N[2022-02-10 12:09:00], latitude: "some latitude", longitude: "some longitude", notes: "some notes", status: "ToDo", street_name: "some street_name", street_number: "some street_number", total_unsterilized_cats: 42, zip: "some zip"}
+  @update_attrs %{city: "some updated city", contact_name: "some updated contact_name", contact_phone: "some updated contact_phone", inactive_since: ~N[2022-02-11 12:09:00], latitude: "some updated latitude", longitude: "some updated longitude", notes: "some updated notes", status: "InProgress", street_name: "some updated street_name", street_number: "some updated street_number", total_unsterilized_cats: 43, zip: "some updated zip"}
   @invalid_attrs %{city: nil, contact_name: nil, contact_phone: nil, inactive_since: nil, latitude: nil, longitude: nil, notes: nil, status: nil, street_name: nil, street_number: nil, total_unsterilized_cats: nil, zip: nil}
 
   describe "index" do
