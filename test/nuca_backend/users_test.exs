@@ -8,7 +8,15 @@ defmodule NucaBackend.UsersTest do
 
     import NucaBackend.UsersFixtures
 
-    @invalid_attrs %{email: nil, full_name: nil, inactive_since: nil, password_hash: nil, phone: nil, role: nil, username: nil}
+    @invalid_attrs %{
+      email: nil,
+      full_name: nil,
+      inactive_since: nil,
+      password_hash: nil,
+      phone: nil,
+      role: nil,
+      username: nil
+    }
 
     test "list_user/0 returns all user" do
       user = user_fixture()
@@ -21,7 +29,15 @@ defmodule NucaBackend.UsersTest do
     end
 
     test "create_user/1 with valid data creates a user" do
-      valid_attrs = %{email: "some email", full_name: "some full_name", inactive_since: ~N[2022-02-10 10:02:00], password_hash: "some password_hash", phone: "some phone", role: "some role", username: "some username"}
+      valid_attrs = %{
+        email: "some email",
+        full_name: "some full_name",
+        inactive_since: ~N[2022-02-10 10:02:00],
+        password_hash: "some password_hash",
+        phone: "some phone",
+        role: "some role",
+        username: "some username"
+      }
 
       assert {:ok, %User{} = user} = Users.create_user(valid_attrs)
       assert user.email == "some email"
@@ -39,7 +55,16 @@ defmodule NucaBackend.UsersTest do
 
     test "update_user/2 with valid data updates the user" do
       user = user_fixture()
-      update_attrs = %{email: "some updated email", full_name: "some updated full_name", inactive_since: ~N[2022-02-11 10:02:00], password_hash: "some updated password_hash", phone: "some updated phone", role: "some updated role", username: "some updated username"}
+
+      update_attrs = %{
+        email: "some updated email",
+        full_name: "some updated full_name",
+        inactive_since: ~N[2022-02-11 10:02:00],
+        password_hash: "some updated password_hash",
+        phone: "some updated phone",
+        role: "some updated role",
+        username: "some updated username"
+      }
 
       assert {:ok, %User{} = user} = Users.update_user(user, update_attrs)
       assert user.email == "some updated email"

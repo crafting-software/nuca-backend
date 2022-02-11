@@ -11,8 +11,8 @@ config :nuca_backend,
   ecto_repos: [NucaBackend.Repo]
 
 config :nuca_backend,
-  NucaBackend.Repo,
-  migration_primary_key: [name: :id, type: :uuid]
+       NucaBackend.Repo,
+       migration_primary_key: [name: :id, type: :uuid]
 
 # Configures the endpoint
 config :nuca_backend, NucaBackendWeb.Endpoint,

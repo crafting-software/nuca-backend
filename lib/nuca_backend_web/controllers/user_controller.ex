@@ -8,7 +8,7 @@ defmodule NucaBackendWeb.UserController do
     users = Users.list_user()
     conn |> render("index.json", users: users)
   end
-  
+
   def create(conn, %{"user" => user_params}) do
     with {:ok, %User{} = user} <- Users.create_user(user_params) do
       conn
