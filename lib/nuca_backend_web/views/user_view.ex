@@ -1,0 +1,14 @@
+defmodule NucaBackendWeb.UserView do
+  use NucaBackendWeb, :view
+  alias NucaBackendWeb.UserView
+
+  def render("index.json", %{users: users}), do: render_many(users, UserView, "user.json")
+
+  def render("show.json", %{user: user}), do: render_one(user, UserView, "user.json")
+
+  def render("user.json", %{user: user}),
+    do:
+      user
+      |> Map.from_struct()
+      |> Map.drop(~w/__meta__ created_at updated_at/a)
+end
