@@ -1,0 +1,48 @@
+<h1>Listing Hotspot</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Latitude</th>
+      <th>Longitude</th>
+      <th>Street name</th>
+      <th>Street number</th>
+      <th>City</th>
+      <th>Zip</th>
+      <th>Status</th>
+      <th>Contact name</th>
+      <th>Contact phone</th>
+      <th>Notes</th>
+      <th>Inactive since</th>
+      <th>Total unsterilized cats</th>
+
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+<%= for hotspot <- @hotspot do %>
+    <tr>
+      <td><%= hotspot.latitude %></td>
+      <td><%= hotspot.longitude %></td>
+      <td><%= hotspot.street_name %></td>
+      <td><%= hotspot.street_number %></td>
+      <td><%= hotspot.city %></td>
+      <td><%= hotspot.zip %></td>
+      <td><%= hotspot.status %></td>
+      <td><%= hotspot.contact_name %></td>
+      <td><%= hotspot.contact_phone %></td>
+      <td><%= hotspot.notes %></td>
+      <td><%= hotspot.inactive_since %></td>
+      <td><%= hotspot.total_unsterilized_cats %></td>
+
+      <td>
+        <span><%= link "Show", to: Routes.hotspot_path(@conn, :show, hotspot) %></span>
+        <span><%= link "Edit", to: Routes.hotspot_path(@conn, :edit, hotspot) %></span>
+        <span><%= link "Delete", to: Routes.hotspot_path(@conn, :delete, hotspot), method: :delete, data: [confirm: "Are you sure?"] %></span>
+      </td>
+    </tr>
+<% end %>
+  </tbody>
+</table>
+
+<span><%= link "New Hotspot", to: Routes.hotspot_path(@conn, :new) %></span>

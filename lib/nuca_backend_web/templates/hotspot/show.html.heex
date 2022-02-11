@@ -1,0 +1,68 @@
+<h1>Show Hotspot</h1>
+
+<ul>
+
+  <li>
+    <strong>Latitude:</strong>
+    <%= @hotspot.latitude %>
+  </li>
+
+  <li>
+    <strong>Longitude:</strong>
+    <%= @hotspot.longitude %>
+  </li>
+
+  <li>
+    <strong>Street name:</strong>
+    <%= @hotspot.street_name %>
+  </li>
+
+  <li>
+    <strong>Street number:</strong>
+    <%= @hotspot.street_number %>
+  </li>
+
+  <li>
+    <strong>City:</strong>
+    <%= @hotspot.city %>
+  </li>
+
+  <li>
+    <strong>Zip:</strong>
+    <%= @hotspot.zip %>
+  </li>
+
+  <li>
+    <strong>Status:</strong>
+    <%= @hotspot.status %>
+  </li>
+
+  <li>
+    <strong>Contact name:</strong>
+    <%= @hotspot.contact_name %>
+  </li>
+
+  <li>
+    <strong>Contact phone:</strong>
+    <%= @hotspot.contact_phone %>
+  </li>
+
+  <li>
+    <strong>Notes:</strong>
+    <%= @hotspot.notes %>
+  </li>
+
+  <li>
+    <strong>Inactive since:</strong>
+    <%= @hotspot.inactive_since %>
+  </li>
+
+  <li>
+    <strong>Total unsterilized cats:</strong>
+    <%= @hotspot.total_unsterilized_cats %>
+  </li>
+
+</ul>
+
+<span><%= link "Edit", to: Routes.hotspot_path(@conn, :edit, @hotspot) %></span> |
+<span><%= link "Back", to: Routes.hotspot_path(@conn, :index) %></span>

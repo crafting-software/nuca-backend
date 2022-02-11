@@ -24,6 +24,7 @@ defmodule NucaBackendWeb.Router do
     pipe_through :api
 
     resources "/users", UserController
+    resources "/hotspots", HotspotController
   end
 
   if Mix.env() in [:dev, :test] do
