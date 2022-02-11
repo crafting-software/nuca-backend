@@ -10,7 +10,14 @@ defmodule NucaBackendWeb.AuthController do
            {:username_exists, Users.get_by_username(username)},
          {:is_correct_password, true} <-
            {:is_correct_password, Bcrypt.verify_pass(password, user.password_hash)} do
-      conn |> render("show.json", user: user, token: JwtAuthToken.generate_jwt(claims: %{user_id: user.id, iat: DateTime.utc_now |> DateTime.to_unix}))
+      conn
+      |> render("show.json",
+        user: user,
+        token:
+          JwtAuthToken.generate_jwt(
+            claims: %{user_id: user.id, iat: DateTime.utc_now() |> DateTime.to_unix()}
+          )
+      )
     else
       {:username_exists, _} ->
         conn |> HttpUtils.unauthorized("credentials do not match")
