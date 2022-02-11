@@ -5,7 +5,7 @@ defmodule NucaBackendWeb.HotspotController do
   alias NucaBackend.Hotspots.Hotspot
 
   def index(conn, _params) do
-    hotspots = Hotspots.list_hotspot()
+    hotspots = Hotspots.list_hotspots()
     render(conn, "index.html", hotspots: hotspots)
   end
 

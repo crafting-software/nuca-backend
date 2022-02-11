@@ -1,8 +1,7 @@
 defmodule NucaBackend.Hotspots.Hotspot do
-  use Ecto.Schema
+  use NucaBackend.Schema
   import Ecto.Changeset
 
-  @primary_key {:id, :binary_id, autogenerate: true}
   schema "hotspot" do
     field :city, :string
     field :contact_name, :string
@@ -24,7 +23,6 @@ defmodule NucaBackend.Hotspots.Hotspot do
   def changeset(hotspot, attrs) do
     hotspot
     |> cast(attrs, [
-      :id,
       :latitude,
       :longitude,
       :street_name,

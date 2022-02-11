@@ -12,7 +12,7 @@ defmodule NucaBackend.HotspotsTest do
 
     test "list_hotspot/0 returns all hotspot" do
       hotspot = hotspot_fixture()
-      assert Hotspots.list_hotspot() == [hotspot]
+      assert Hotspots.list_hotspots() == [hotspot]
     end
 
     test "get_hotspot!/1 returns the hotspot with given id" do
