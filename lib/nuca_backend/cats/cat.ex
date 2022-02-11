@@ -2,8 +2,9 @@ defmodule NucaBackend.Cats.Cat do
   use NucaBackend.Schema
   import Ecto.Changeset
 
+  alias NucaBackend.Users.User
+
   schema "cat" do
-    field :captured_by, Ecto.UUID
     field :check_in_date, :date
     field :check_out_date, :date
     field :description, :string
@@ -14,6 +15,7 @@ defmodule NucaBackend.Cats.Cat do
     field :notes, :string
     field :raw_address, :string
     field :sex, :string
+    belongs_to :captured_by, User, foreign_key: :capturer_id
 
     timestamps()
   end
@@ -27,7 +29,7 @@ defmodule NucaBackend.Cats.Cat do
       :is_sterilized,
       :check_in_date,
       :check_out_date,
-      :captured_by,
+      :capturer_id,
       :media,
       :notes,
       :raw_address,

@@ -18,7 +18,7 @@ defmodule NucaBackendWeb.CatView do
       is_sterilized: cat.is_sterilized,
       check_in_date: cat.check_in_date,
       check_out_date: cat.check_out_date,
-      captured_by: cat.captured_by,
+      capturer_id: cat.capturer_id,
       media: cat.media,
       notes: cat.notes
     }

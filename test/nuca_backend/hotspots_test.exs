@@ -8,7 +8,20 @@ defmodule NucaBackend.HotspotsTest do
 
     import NucaBackend.HotspotsFixtures
 
-    @invalid_attrs %{city: nil, contact_name: nil, contact_phone: nil, inactive_since: nil, latitude: nil, longitude: nil, notes: nil, status: nil, street_name: nil, street_number: nil, total_unsterilized_cats: nil, zip: nil}
+    @invalid_attrs %{
+      city: nil,
+      contact_name: nil,
+      contact_phone: nil,
+      inactive_since: nil,
+      latitude: nil,
+      longitude: nil,
+      notes: nil,
+      status: nil,
+      street_name: nil,
+      street_number: nil,
+      total_unsterilized_cats: nil,
+      zip: nil
+    }
 
     test "list_hotspot/0 returns all hotspot" do
       hotspot = hotspot_fixture()
@@ -21,7 +34,20 @@ defmodule NucaBackend.HotspotsTest do
     end
 
     test "create_hotspot/1 with valid data creates a hotspot" do
-      valid_attrs = %{city: "some city", contact_name: "some contact_name", contact_phone: "some contact_phone", inactive_since: ~N[2022-02-10 12:09:00], latitude: "some latitude", longitude: "some longitude", notes: "some notes", status: "ToDo", street_name: "some street_name", street_number: "some street_number", total_unsterilized_cats: 42, zip: "some zip"}
+      valid_attrs = %{
+        city: "some city",
+        contact_name: "some contact_name",
+        contact_phone: "some contact_phone",
+        inactive_since: ~N[2022-02-10 12:09:00],
+        latitude: "some latitude",
+        longitude: "some longitude",
+        notes: "some notes",
+        status: "ToDo",
+        street_name: "some street_name",
+        street_number: "some street_number",
+        total_unsterilized_cats: 42,
+        zip: "some zip"
+      }
 
       assert {:ok, %Hotspot{} = hotspot} = Hotspots.create_hotspot(valid_attrs)
       assert hotspot.city == "some city"
@@ -44,7 +70,21 @@ defmodule NucaBackend.HotspotsTest do
 
     test "update_hotspot/2 with valid data updates the hotspot" do
       hotspot = hotspot_fixture()
-      update_attrs = %{city: "some updated city", contact_name: "some updated contact_name", contact_phone: "some updated contact_phone", inactive_since: ~N[2022-02-11 12:09:00], latitude: "some updated latitude", longitude: "some updated longitude", notes: "some updated notes", status: "InProgress", street_name: "some updated street_name", street_number: "some updated street_number", total_unsterilized_cats: 43, zip: "some updated zip"}
+
+      update_attrs = %{
+        city: "some updated city",
+        contact_name: "some updated contact_name",
+        contact_phone: "some updated contact_phone",
+        inactive_since: ~N[2022-02-11 12:09:00],
+        latitude: "some updated latitude",
+        longitude: "some updated longitude",
+        notes: "some updated notes",
+        status: "InProgress",
+        street_name: "some updated street_name",
+        street_number: "some updated street_number",
+        total_unsterilized_cats: 43,
+        zip: "some updated zip"
+      }
 
       assert {:ok, %Hotspot{} = hotspot} = Hotspots.update_hotspot(hotspot, update_attrs)
       assert hotspot.city == "some updated city"

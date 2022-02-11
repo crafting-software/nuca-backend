@@ -11,7 +11,7 @@ defmodule NucaBackend.CatsFixtures do
     {:ok, cat} =
       attrs
       |> Enum.into(%{
-        captured_by: "7488a646-e31f-11e4-aace-600308960662",
+        capturer_id: "7488a646-e31f-11e4-aace-600308960662",
         check_in_date: ~D[2022-02-10],
         check_out_date: ~D[2022-02-10],
         description: "some description",

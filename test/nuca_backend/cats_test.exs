@@ -9,7 +9,7 @@ defmodule NucaBackend.CatsTest do
     import NucaBackend.CatsFixtures
 
     @invalid_attrs %{
-      captured_by: nil,
+      capturer_id: nil,
       check_in_date: nil,
       check_out_date: nil,
       description: nil,
@@ -34,7 +34,7 @@ defmodule NucaBackend.CatsTest do
 
     test "create_cat/1 with valid data creates a cat" do
       valid_attrs = %{
-        captured_by: "7488a646-e31f-11e4-aace-600308960662",
+        capturer_id: "7488a646-e31f-11e4-aace-600308960662",
         check_in_date: ~D[2022-02-10],
         check_out_date: ~D[2022-02-10],
         description: "some description",
@@ -48,7 +48,7 @@ defmodule NucaBackend.CatsTest do
       }
 
       assert {:ok, %Cat{} = cat} = Cats.create_cat(valid_attrs)
-      assert cat.captured_by == "7488a646-e31f-11e4-aace-600308960662"
+      assert cat.capturer_id == "7488a646-e31f-11e4-aace-600308960662"
       assert cat.check_in_date == ~D[2022-02-10]
       assert cat.check_out_date == ~D[2022-02-10]
       assert cat.description == "some description"
@@ -69,7 +69,7 @@ defmodule NucaBackend.CatsTest do
       cat = cat_fixture()
 
       update_attrs = %{
-        captured_by: "7488a646-e31f-11e4-aace-600308960668",
+        capturer_id: "7488a646-e31f-11e4-aace-600308960668",
         check_in_date: ~D[2022-02-11],
         check_out_date: ~D[2022-02-11],
         description: "some updated description",
@@ -83,7 +83,7 @@ defmodule NucaBackend.CatsTest do
       }
 
       assert {:ok, %Cat{} = cat} = Cats.update_cat(cat, update_attrs)
-      assert cat.captured_by == "7488a646-e31f-11e4-aace-600308960668"
+      assert cat.capturer_id == "7488a646-e31f-11e4-aace-600308960668"
       assert cat.check_in_date == ~D[2022-02-11]
       assert cat.check_out_date == ~D[2022-02-11]
       assert cat.description == "some updated description"
