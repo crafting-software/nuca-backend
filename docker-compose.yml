@@ -1,0 +1,12 @@
+# Start all the storage containers locally without running the application inside docker
+version: '2'
+services:
+  db:
+    image: postgres:13
+    environment:
+      POSTGRES_USER: nuca_backend
+      POSTGRES_PASSWORD: nuca_backend
+    ports:
+      - "5432:5432"
+    volumes:
+      - ${HOME}/.nuca_backend/database/data:/var/lib/postgresql/data
