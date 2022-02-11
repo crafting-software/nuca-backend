@@ -1,5 +1,6 @@
 defmodule NucaBackendWeb.Router do
   use NucaBackendWeb, :router
+  alias NucaBackendWeb.Plugs.RequireAuthorization
 
   pipeline :browser do
     plug :accepts, ["html"]
@@ -14,6 +15,10 @@ defmodule NucaBackendWeb.Router do
     plug :accepts, ["json"]
   end
 
+  pipeline :require_authorization do
+    plug RequireAuthorization
+  end
+
   scope "/", NucaBackendWeb do
     pipe_through :browser
 
@@ -22,6 +27,10 @@ defmodule NucaBackendWeb.Router do
 
   scope "/api", NucaBackendWeb do
     pipe_through :api
+
+    post "/login", AuthController, :authenticate
+
+    pipe_through :require_authorization
 
     resources "/users", UserController
   end
