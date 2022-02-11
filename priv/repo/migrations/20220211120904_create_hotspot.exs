@@ -15,6 +15,7 @@ defmodule NucaBackend.Repo.Migrations.CreateHotspot do
       add :notes, :text
       add :inactive_since, :naive_datetime
       add :total_unsterilized_cats, :integer
+      add(:volunteer_id, references(:user, type: :uuid), null: true)
 
       timestamps()
     end

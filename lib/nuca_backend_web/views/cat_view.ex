@@ -20,10 +20,7 @@ defmodule NucaBackendWeb.CatView do
       check_out_date: cat.check_out_date,
       captured_by: cat.captured_by,
       media: cat.media,
-      notes: cat.notes,
-      raw_address: cat.raw_address,
-      hotspot_id: cat.hotspot_id,
-      is_imported: cat.is_imported
+      notes: cat.notes
     }
   end
 end

@@ -22,12 +22,11 @@ defmodule NucaBackend.Users.User do
     |> cast(attrs, [:role, :full_name, :phone, :email, :username, :password_hash, :inactive_since])
     |> validate_required([
       :role,
-      :full_name,
-      :phone,
-      :email,
-      :username,
-      :password_hash,
-      :inactive_since
+      :full_name
+      # :phone,
+      # :email,
+      # :username,
+      # :password_hash,
     ])
   end
 end
