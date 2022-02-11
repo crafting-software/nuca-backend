@@ -1,6 +1,8 @@
 defmodule NucaBackend.Hotspots.Hotspot do
   use NucaBackend.Schema
   import Ecto.Changeset
+  alias NucaBackend.Cats.Cat
+  alias NucaBackend.Users.User
 
   schema "hotspot" do
     field :city, :string
@@ -15,6 +17,8 @@ defmodule NucaBackend.Hotspots.Hotspot do
     field :street_number, :string
     field :total_unsterilized_cats, :integer
     field :zip, :string
+    has_many(:cats, Cat)
+    belongs_to(:volunteer, User)
 
     timestamps()
   end
@@ -34,7 +38,8 @@ defmodule NucaBackend.Hotspots.Hotspot do
       :contact_phone,
       :notes,
       :inactive_since,
-      :total_unsterilized_cats
+      :total_unsterilized_cats,
+      :volunteer_id
     ])
     |> validate_required([:latitude, :longitude, :street_name])
     |> validate_inclusion(:status, ["ToDo", "InProgress", "Done"])

@@ -1,14 +1,24 @@
 defmodule NucaBackend.Hotspots do
   import Ecto.Query, warn: false
   alias NucaBackend.Repo
+  alias NucaBackend.Hotspots.Hotspot
 
   alias NucaBackend.Hotspots.Hotspot
 
   def list_hotspots do
-    Repo.all(Hotspot)
+    from(h in Hotspot,
+      where: is_nil(h.inactive_since),
+      select: %{
+        id: h.id,
+        longitude: h.longitude,
+        latitude: h.latitude,
+        status: h.status
+      }
+    )
+    |> Repo.all()
   end
 
-  def get_hotspot!(id), do: Repo.get!(Hotspot, id)
+  def get_hotspot!(id), do: Repo.get!(Hotspot, id) |> Repo.preload([:cats, :volunteer])
 
   def create_hotspot(attrs \\ %{}) do
     %Hotspot{}

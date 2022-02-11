@@ -5,6 +5,7 @@ defmodule NucaBackendWeb.Router do
   pipeline :browser do
     plug :accepts, ["html"]
     plug :fetch_session
+    plug(:fetch_flash)
     plug :fetch_live_flash
     plug :put_root_layout, {NucaBackendWeb.LayoutView, :root}
     plug :protect_from_forgery
@@ -26,6 +27,7 @@ defmodule NucaBackendWeb.Router do
   end
 
   scope "/api", NucaBackendWeb do
+    pipe_through :browser
     pipe_through :api
 
     post "/login", AuthController, :authenticate

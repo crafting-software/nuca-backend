@@ -6,7 +6,7 @@ defmodule NucaBackendWeb.HotspotController do
 
   def index(conn, _params) do
     hotspots = Hotspots.list_hotspots()
-    render(conn, "index.html", hotspots: hotspots)
+    render(conn, "index.json", hotspots: hotspots)
   end
 
   def new(conn, _params) do
@@ -28,7 +28,7 @@ defmodule NucaBackendWeb.HotspotController do
 
   def show(conn, %{"id" => id}) do
     hotspot = Hotspots.get_hotspot!(id)
-    render(conn, "show.html", hotspot: hotspot)
+    render(conn, "hotspot_details.json", hotspot: hotspot)
   end
 
   def edit(conn, %{"id" => id}) do
