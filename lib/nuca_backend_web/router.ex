@@ -24,8 +24,9 @@ defmodule NucaBackendWeb.Router do
     pipe_through :api
 
     resources "/users", UserController
-
+    resources "/hotspots", HotspotController
     resources "/cats", CatController
+
   end
 
   # Enables LiveDashboard only for development

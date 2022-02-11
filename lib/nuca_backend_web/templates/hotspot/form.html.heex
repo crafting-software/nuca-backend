@@ -1,0 +1,59 @@
+<.form let={f} for={@changeset} action={@action}>
+  <%= if @changeset.action do %>
+    <div class="alert alert-danger">
+      <p>Oops, something went wrong! Please check the errors below.</p>
+    </div>
+  <% end %>
+
+  <%= label f, :latitude %>
+  <%= text_input f, :latitude %>
+  <%= error_tag f, :latitude %>
+
+  <%= label f, :longitude %>
+  <%= text_input f, :longitude %>
+  <%= error_tag f, :longitude %>
+
+  <%= label f, :street_name %>
+  <%= text_input f, :street_name %>
+  <%= error_tag f, :street_name %>
+
+  <%= label f, :street_number %>
+  <%= text_input f, :street_number %>
+  <%= error_tag f, :street_number %>
+
+  <%= label f, :city %>
+  <%= text_input f, :city %>
+  <%= error_tag f, :city %>
+
+  <%= label f, :zip %>
+  <%= text_input f, :zip %>
+  <%= error_tag f, :zip %>
+
+  <%= label f, :status %>
+  <%= text_input f, :status %>
+  <%= error_tag f, :status %>
+
+  <%= label f, :contact_name %>
+  <%= text_input f, :contact_name %>
+  <%= error_tag f, :contact_name %>
+
+  <%= label f, :contact_phone %>
+  <%= text_input f, :contact_phone %>
+  <%= error_tag f, :contact_phone %>
+
+  <%= label f, :notes %>
+  <%= textarea f, :notes %>
+  <%= error_tag f, :notes %>
+
+  <%= label f, :inactive_since %>
+  <%= datetime_select f, :inactive_since %>
+  <%= error_tag f, :inactive_since %>
+
+  <%= label f, :total_unsterilized_cats %>
+  <%= number_input f, :total_unsterilized_cats %>
+  <%= error_tag f, :total_unsterilized_cats %>
+
+  <div>
+    <%= submit "Save" %>
+  </div>
+</.form>
