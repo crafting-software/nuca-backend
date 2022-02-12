@@ -11,8 +11,7 @@ defmodule NucaBackend.Users.User do
     field :role, :string
     field :username, :string
     field :password, :string, virtual: true
-    # has_many :cats
-    # has_many :hotspot
+
 
     timestamps()
   end

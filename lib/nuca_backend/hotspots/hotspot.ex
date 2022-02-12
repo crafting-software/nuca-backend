@@ -4,6 +4,8 @@ defmodule NucaBackend.Hotspots.Hotspot do
   alias NucaBackend.Cats.Cat
   alias NucaBackend.Users.User
 
+  alias NucaBackend.Cats.Cat
+
   schema "hotspot" do
     field :city, :string
     field :contact_name, :string

@@ -6,7 +6,7 @@ defmodule NucaBackendWeb.CatControllerTest do
   alias NucaBackend.Cats.Cat
 
   @create_attrs %{
-    captured_by: "7488a646-e31f-11e4-aace-600308960662",
+    capturer_id: "7488a646-e31f-11e4-aace-600308960662",
     check_in_date: ~D[2022-02-10],
     check_out_date: ~D[2022-02-10],
     description: "some description",
@@ -19,7 +19,7 @@ defmodule NucaBackendWeb.CatControllerTest do
     sex: "M"
   }
   @update_attrs %{
-    captured_by: "7488a646-e31f-11e4-aace-600308960668",
+    capturer_id: "7488a646-e31f-11e4-aace-600308960668",
     check_in_date: ~D[2022-02-11],
     check_out_date: ~D[2022-02-11],
     description: "some updated description",
@@ -32,7 +32,7 @@ defmodule NucaBackendWeb.CatControllerTest do
     sex: "M"
   }
   @invalid_attrs %{
-    captured_by: nil,
+    capturer_id: nil,
     check_in_date: nil,
     check_out_date: nil,
     description: nil,
@@ -65,7 +65,7 @@ defmodule NucaBackendWeb.CatControllerTest do
 
       assert %{
                "id" => ^id,
-               "captured_by" => "7488a646-e31f-11e4-aace-600308960662",
+               "capturer_id" => "7488a646-e31f-11e4-aace-600308960662",
                "check_in_date" => "2022-02-10",
                "check_out_date" => "2022-02-10",
                "description" => "some description",
@@ -96,7 +96,7 @@ defmodule NucaBackendWeb.CatControllerTest do
 
       assert %{
                "id" => ^id,
-               "captured_by" => "7488a646-e31f-11e4-aace-600308960668",
+               "capturer_id" => "7488a646-e31f-11e4-aace-600308960668",
                "check_in_date" => "2022-02-11",
                "check_out_date" => "2022-02-11",
                "description" => "some updated description",
