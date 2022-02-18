@@ -10,7 +10,7 @@ defmodule NucaBackendWeb.UserView do
     do:
       user
       |> Map.from_struct()
-      |> Map.drop(~w/__meta__ created_at updated_at/a)
+      |> Map.drop(~w/__meta__ inserted_at updated_at password password_hash/a)
 
   def render("volunteer.json", %{user: user}),
     do:

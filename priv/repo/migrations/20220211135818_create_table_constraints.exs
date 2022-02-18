@@ -3,6 +3,7 @@ defmodule NucaBackend.Repo.Migrations.CreateTableConstraints do
 
   def change do
     alter table(:hotspot) do
+      remove :volunteer_id
       add :volunteer_id, references(:user)
     end
 
