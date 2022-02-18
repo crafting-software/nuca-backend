@@ -21,7 +21,13 @@ defmodule NucaBackend.Users.User do
     user
     |> cast(attrs, [
       :role,
-      :full_name
+      :full_name,
+      :phone,
+      :email,
+      :username,
+      :password_hash,
+      :inactive_since,
+      :password
     ])
     |> validate_required([
       :role,
@@ -30,7 +36,6 @@ defmodule NucaBackend.Users.User do
       :email,
       :username,
       :password_hash,
-      :inactive_since,
       :password
     ])
     |> validate_length(:password, min: 8, max: 20)
