@@ -15,8 +15,14 @@ defmodule NucaBackendWeb.HotspotView do
     hotspot
     |> Map.from_struct()
     |> Map.drop([:__meta__, :cats, :volunteer_id, :inserted_at, :updated_at])
-    |> Map.put(:sterilized_cats, render_many(sterilized_cats, NucaBackendWeb.CatView, "cat.json", as: :cat))
-    |> Map.put(:unsterilized_cats, render_many(unsterilized_cats, NucaBackendWeb.CatView, "cat.json", as: :cat))
+    |> Map.put(
+      :sterilized_cats,
+      render_many(sterilized_cats, NucaBackendWeb.CatView, "cat.json", as: :cat)
+    )
+    |> Map.put(
+      :unsterilized_cats,
+      render_many(unsterilized_cats, NucaBackendWeb.CatView, "cat.json", as: :cat)
+    )
     |> Map.put(
       :volunteer,
       render_one(hotspot.volunteer, NucaBackendWeb.UserView, "volunteer.json", as: :user)
