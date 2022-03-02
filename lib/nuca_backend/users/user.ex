@@ -12,7 +12,6 @@ defmodule NucaBackend.Users.User do
     field :username, :string
     field :password, :string, virtual: true
 
-
     timestamps()
   end
 
