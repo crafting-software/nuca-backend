@@ -18,7 +18,7 @@ defmodule NucaBackendWeb.CatView do
       is_sterilized: cat.is_sterilized,
       check_in_date: cat.check_in_date,
       check_out_date: cat.check_out_date,
-      capturer_id: cat.capturer_id,
+      captured_by: render_one(cat.captured_by, NucaBackendWeb.UserView, "user.json", as: :user),
       media: cat.media,
       notes: cat.notes
     }

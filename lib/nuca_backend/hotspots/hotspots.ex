@@ -18,7 +18,7 @@ defmodule NucaBackend.Hotspots do
     |> Repo.all()
   end
 
-  def get_hotspot!(id), do: Repo.get!(Hotspot, id) |> Repo.preload([:cats, :volunteer])
+  def get_hotspot!(id), do: Repo.get!(Hotspot, id) |> Repo.preload([{:cats, :captured_by}, :volunteer])
 
   def create_hotspot(attrs \\ %{}) do
     %Hotspot{}
