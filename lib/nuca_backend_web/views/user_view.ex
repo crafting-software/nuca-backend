@@ -16,5 +16,7 @@ defmodule NucaBackendWeb.UserView do
     do:
       user
       |> Map.from_struct()
-      |> Map.drop(~w/__meta__ inserted_at updated_at password_hash role username email inactive_since/a)
+      |> Map.drop(
+        ~w/__meta__ inserted_at updated_at password_hash role username email inactive_since/a
+      )
 end

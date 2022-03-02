@@ -7,6 +7,7 @@ defmodule NucaBackend.Hotspots.Hotspot do
   alias NucaBackend.Cats.Cat
 
   schema "hotspot" do
+    field :description, :string
     field :city, :string
     field :contact_name, :string
     field :contact_phone, :string
@@ -15,8 +16,7 @@ defmodule NucaBackend.Hotspots.Hotspot do
     field :longitude, :string
     field :notes, :string
     field :status, :string, default: "ToDo"
-    field :street_name, :string
-    field :street_number, :string
+    field :address, :string
     field :total_unsterilized_cats, :integer
     field :zip, :string
     has_many(:cats, Cat)
@@ -29,10 +29,10 @@ defmodule NucaBackend.Hotspots.Hotspot do
   def changeset(hotspot, attrs) do
     hotspot
     |> cast(attrs, [
+      :description,
       :latitude,
       :longitude,
-      :street_name,
-      :street_number,
+      :address,
       :city,
       :zip,
       :status,
@@ -43,7 +43,7 @@ defmodule NucaBackend.Hotspots.Hotspot do
       :total_unsterilized_cats,
       :volunteer_id
     ])
-    |> validate_required([:latitude, :longitude, :street_name])
+    |> validate_required([:latitude, :longitude, :address, :description])
     |> validate_inclusion(:status, ["ToDo", "InProgress", "Done"])
   end
 end
