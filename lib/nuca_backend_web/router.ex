@@ -27,7 +27,6 @@ defmodule NucaBackendWeb.Router do
   end
 
   scope "/api", NucaBackendWeb do
-    pipe_through :browser
     pipe_through :api
 
     post "/login", AuthController, :authenticate
