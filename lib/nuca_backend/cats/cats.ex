@@ -5,7 +5,7 @@ defmodule NucaBackend.Cats do
   alias NucaBackend.Cats.Cat
 
   def list_cat do
-    Repo.all(Cat)
+    Repo.all(Cat) |> Repo.preload([:captured_by])
   end
 
   def get_cat!(id), do: Repo.get!(Cat, id) |> Repo.preload([:captured_by])
