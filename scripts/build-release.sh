@@ -5,6 +5,8 @@ set -e
 export MIX_ENV=prod
 export PORT=80
 
+export NUCA_JOKEN_SECRET=""
+
 APP_NAME=nuca_backend
 APP_VSN="$(grep 'version:' mix.exs | cut -d '"' -f2 | tail -1 )"
 echo $APP_NAME
