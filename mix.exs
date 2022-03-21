@@ -9,6 +9,14 @@ defmodule NucaBackend.MixProject do
       elixirc_paths: elixirc_paths(Mix.env()),
       compilers: [:gettext] ++ Mix.compilers(),
       start_permanent: Mix.env() == :prod,
+      releases: [
+        nuca_backend: [
+          include_executables_for: [:unix],
+          steps: [:assemble, :tar],
+          version: "0.1.0",
+          include_erts: false
+        ]
+      ],
       aliases: aliases(),
       deps: deps()
     ]
