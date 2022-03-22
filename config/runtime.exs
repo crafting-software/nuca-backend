@@ -46,6 +46,14 @@ if config_env() == :prod do
     http: [
       port: port
     ],
+    https: [
+      port: 443,
+      cipher_suite: :strong,
+      keyfile: System.fetch_env!("NUCA_SSL_KEY_PATH"),
+      certfile: System.fetch_env!("NUCA_SSL_CERT_PATH"),
+      cacertfile: System.fetch_env!("NUCA_SSL_CA_CERT_PATH"),
+      transport_options: [socket_opts: [:inet6]]
+    ],
     secret_key_base: secret_key_base
 
   # ## Using releases
