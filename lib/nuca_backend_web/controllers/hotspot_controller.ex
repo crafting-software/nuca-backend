@@ -37,8 +37,8 @@ defmodule NucaBackendWeb.HotspotController do
     render(conn, "edit.html", hotspot: hotspot, changeset: changeset)
   end
 
-  def update(conn, %{"id" => id, "hotspot" => hotspot_params}) do
-    hotspot = Hotspots.get_hotspot!(id)
+  def update(conn, hotspot_params) do
+    hotspot = Hotspots.get_hotspot!(hotspot_params["id"])
 
     case Hotspots.update_hotspot(hotspot, hotspot_params) do
       {:ok, hotspot} ->
