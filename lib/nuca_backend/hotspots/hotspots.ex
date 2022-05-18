@@ -1,4 +1,5 @@
 defmodule NucaBackend.Hotspots do
+  require OK
   import Ecto.Query, warn: false
   alias NucaBackend.Repo
   alias NucaBackend.Hotspots.Hotspot
@@ -24,6 +25,7 @@ defmodule NucaBackend.Hotspots do
     %Hotspot{}
     |> Hotspot.changeset(attrs)
     |> Repo.insert()
+    |> OK.flat_map(fn (h) -> {:ok, Repo.preload(h, [{:cats, :captured_by}, :volunteer])} end)
   end
 
   def update_hotspot(%Hotspot{} = hotspot, attrs) do
