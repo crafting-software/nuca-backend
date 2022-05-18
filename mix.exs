@@ -59,7 +59,8 @@ defmodule NucaBackend.MixProject do
       {:plug_cowboy, "~> 2.5"},
       {:cors_plug, "~> 1.2"},
       {:bcrypt_elixir, "~> 2.3"},
-      {:joken, "~> 2.4"}
+      {:joken, "~> 2.4"},
+      {:ok, "~> 2.3"}
     ]
   end
 

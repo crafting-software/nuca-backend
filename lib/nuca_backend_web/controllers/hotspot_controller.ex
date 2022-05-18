@@ -14,16 +14,14 @@ defmodule NucaBackendWeb.HotspotController do
     render(conn, "new.html", changeset: changeset)
   end
 
-  def create(conn, %{"hotspot" => hotspot_params}) do
+  def create(conn, hotspot_params) do
     case Hotspots.create_hotspot(hotspot_params) do
       {:ok, hotspot} ->
-        conn
-        |> put_flash(:info, "Hotspot created successfully.")
-        |> redirect(to: Routes.hotspot_path(conn, :show, hotspot))
-
+        render(conn, "hotspot_details.json", hotspot: hotspot)
       {:error, %Ecto.Changeset{} = changeset} ->
-        render(conn, "new.html", changeset: changeset)
-    end
+        send_resp(conn, 400, "invalid data for hotspot creation")
+   end
+
   end
 
   def show(conn, %{"id" => id}) do
@@ -42,12 +40,10 @@ defmodule NucaBackendWeb.HotspotController do
 
     case Hotspots.update_hotspot(hotspot, hotspot_params) do
       {:ok, hotspot} ->
-        conn
-        |> put_flash(:info, "Hotspot updated successfully.")
-        |> redirect(to: Routes.hotspot_path(conn, :show, hotspot))
+        render(conn, "hotspot_details.json", hotspot: hotspot)
 
       {:error, %Ecto.Changeset{} = changeset} ->
-        render(conn, "edit.html", hotspot: hotspot, changeset: changeset)
+        send_resp(conn, 400, "invalid data for hotspot update")
     end
   end
 
