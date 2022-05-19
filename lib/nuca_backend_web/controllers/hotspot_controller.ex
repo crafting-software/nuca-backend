@@ -47,12 +47,15 @@ defmodule NucaBackendWeb.HotspotController do
     end
   end
 
-  def delete(conn, %{"id" => id}) do
-    hotspot = Hotspots.get_hotspot!(id)
-    {:ok, _hotspot} = Hotspots.delete_hotspot(hotspot)
+  def delete(conn, params) do
+    hotspot = Hotspots.get_hotspot!(params["id"])
 
-    conn
-    |> put_flash(:info, "Hotspot deleted successfully.")
-    |> redirect(to: Routes.hotspot_path(conn, :index))
+    case Hotspots.delete_hotspot(hotspot) do
+      {:ok, hotspot} ->
+        send_resp(conn, 200, "Hotspot successfully deleted")
+
+      {:error, %Ecto.Changeset{} = changeset} ->
+        send_resp(conn, 400, "invalid data for hotspot delete")
+    end
   end
 end
