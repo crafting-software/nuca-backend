@@ -11,7 +11,7 @@ defmodule NucaBackendWeb.CatController do
     render(conn, "index.json", cat: cat)
   end
 
-  def create(conn, %{"cat" => cat_params}) do
+  def create(conn, cat_params) do
     with {:ok, %Cat{} = cat} <- Cats.create_cat(cat_params) do
       conn
       |> put_status(:created)
@@ -25,16 +25,16 @@ defmodule NucaBackendWeb.CatController do
     render(conn, "show.json", cat: cat)
   end
 
-  def update(conn, %{"id" => id, "cat" => cat_params}) do
-    cat = Cats.get_cat!(id)
+  def update(conn, cat_params) do
+    cat = Cats.get_cat!(cat_params["id"])
 
     with {:ok, %Cat{} = cat} <- Cats.update_cat(cat, cat_params) do
       render(conn, "show.json", cat: cat)
     end
   end
 
-  def delete(conn, %{"id" => id}) do
-    cat = Cats.get_cat!(id)
+  def delete(conn, params) do
+    cat = Cats.get_cat!(params["id"])
 
     with {:ok, %Cat{}} <- Cats.delete_cat(cat) do
       send_resp(conn, :no_content, "")
