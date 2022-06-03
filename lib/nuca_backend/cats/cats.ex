@@ -1,4 +1,5 @@
 defmodule NucaBackend.Cats do
+  require OK
   import Ecto.Query, warn: false
   alias NucaBackend.Repo
 
@@ -14,12 +15,14 @@ defmodule NucaBackend.Cats do
     %Cat{}
     |> Cat.changeset(attrs)
     |> Repo.insert()
+    |> OK.flat_map(fn (h) -> {:ok, Repo.preload(h, [:captured_by])} end)
   end
 
   def update_cat(%Cat{} = cat, attrs) do
     cat
     |> Cat.changeset(attrs)
     |> Repo.update()
+    |> OK.flat_map(fn (h) -> {:ok, Repo.preload(h, [:captured_by])} end)
   end
 
   def delete_cat(%Cat{} = cat) do
