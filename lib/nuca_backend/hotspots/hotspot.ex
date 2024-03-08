@@ -43,7 +43,7 @@ defmodule NucaBackend.Hotspots.Hotspot do
       :total_unsterilized_cats,
       :volunteer_id
     ])
-    |> validate_required([:latitude, :longitude, :address])
+    |> validate_required([:latitude, :longitude])
     |> validate_inclusion(:status, ["ToDo", "InProgress", "Done"])
   end
 end
