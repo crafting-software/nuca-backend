@@ -2,6 +2,7 @@ defmodule NucaBackend.Cats.Cat do
   use NucaBackend.Schema
   import Ecto.Changeset
 
+  alias NucaBackend.Cats.Media.CatPicture
   alias NucaBackend.Users.User
 
   schema "cat" do
@@ -11,7 +12,7 @@ defmodule NucaBackend.Cats.Cat do
     field :hotspot_id, Ecto.UUID
     field :is_imported, :boolean, default: false
     field :is_sterilized, :boolean, default: false
-    field :media, :map
+    has_many :media, CatPicture, on_delete: :delete_all
     field :notes, :string
     field :raw_address, :string
     field :sex, :string
@@ -30,12 +31,12 @@ defmodule NucaBackend.Cats.Cat do
       :check_in_date,
       :check_out_date,
       :capturer_id,
-      :media,
       :notes,
       :raw_address,
       :hotspot_id,
       :is_imported
     ])
+    |> cast_assoc(:media, with: &CatPicture.changeset/2)
     |> validate_required([:sex, :is_sterilized, :hotspot_id, :is_imported])
     |> validate_inclusion(:sex, ["M", "F"])
   end

@@ -35,3 +35,7 @@ npm-debug.log
 /.elixir_ls/
 /rel/
 
+# Ignore local uploads directory
+uploads/
+uploads_temp/
+

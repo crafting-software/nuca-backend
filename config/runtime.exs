@@ -56,6 +56,14 @@ if config_env() == :prod do
     ],
     secret_key_base: secret_key_base
 
+  config :waffle,
+    storage: Waffle.Storage.S3,
+    bucket: System.fetch_env("NUCA_S3_BUCKET"),
+    asset_host: System.fetch_env("NUCA_S3_ASSET_HOST")
+
+  config :ex_aws,
+    json_codec: Jason
+
   # ## Using releases
   #
   # If you are doing OTP releases, you need to instruct Phoenix

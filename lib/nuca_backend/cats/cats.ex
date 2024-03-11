@@ -9,7 +9,7 @@ defmodule NucaBackend.Cats do
     Repo.all(Cat) |> Repo.preload([:captured_by])
   end
 
-  def get_cat!(id), do: Repo.get!(Cat, id) |> Repo.preload([:captured_by])
+  def get_cat!(id), do: Repo.get!(Cat, id) |> Repo.preload([:captured_by, :media])
 
   def create_cat(attrs \\ %{}) do
     %Cat{}

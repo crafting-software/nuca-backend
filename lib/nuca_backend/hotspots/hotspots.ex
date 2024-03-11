@@ -19,13 +19,16 @@ defmodule NucaBackend.Hotspots do
     |> Repo.all()
   end
 
-  def get_hotspot!(id), do: Repo.get!(Hotspot, id) |> Repo.preload([{:cats, :captured_by}, :volunteer])
+  def get_hotspot!(id),
+    do:
+      Repo.get!(Hotspot, id)
+      |> Repo.preload([{:cats, [:captured_by, :media]}, :volunteer])
 
   def create_hotspot(attrs \\ %{}) do
     %Hotspot{}
     |> Hotspot.changeset(attrs)
     |> Repo.insert()
-    |> OK.flat_map(fn (h) -> {:ok, Repo.preload(h, [{:cats, :captured_by}, :volunteer])} end)
+    |> OK.flat_map(fn h -> {:ok, Repo.preload(h, [{:cats, :captured_by}, :volunteer])} end)
   end
 
   def update_hotspot(%Hotspot{} = hotspot, attrs) do

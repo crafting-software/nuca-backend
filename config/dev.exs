@@ -28,6 +28,12 @@ config :nuca_backend, NucaBackendWeb.Endpoint,
     esbuild: {Esbuild, :install_and_run, [:default, ~w(--sourcemap=inline --watch)]}
   ]
 
+config :waffle,
+  storage: Waffle.Storage.Local
+
+config :nuca_backend,
+  local_temp_dir: System.get_env("NUCA_UPLOADS_TEMP_DIR") || "uploads_temp"
+
 # ## SSL Support
 #
 # In order to use HTTPS in development, a self-signed

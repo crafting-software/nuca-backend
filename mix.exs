@@ -28,7 +28,8 @@ defmodule NucaBackend.MixProject do
   def application do
     [
       mod: {NucaBackend.Application, []},
-      extra_applications: [:logger, :runtime_tools]
+      extra_applications: [:logger, :runtime_tools],
+      start_phases: [create_temp_folder_if_no_exists: []]
     ]
   end
 
@@ -60,7 +61,13 @@ defmodule NucaBackend.MixProject do
       {:cors_plug, "~> 1.2"},
       {:bcrypt_elixir, "~> 2.3"},
       {:joken, "~> 2.4"},
-      {:ok, "~> 2.3"}
+      {:ok, "~> 2.3"},
+      {:waffle, "~> 1.1"},
+      {:waffle_ecto, "~> 0.0.12"},
+      {:ex_aws, "~> 2.1.2"},
+      {:ex_aws_s3, "~> 2.0"},
+      {:hackney, "~> 1.9"},
+      {:sweet_xml, "~> 0.6"}
     ]
   end
 
