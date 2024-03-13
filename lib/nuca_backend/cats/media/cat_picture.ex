@@ -13,9 +13,10 @@ defmodule NucaBackend.Cats.Media.CatPicture do
     timestamps()
   end
 
-  def changeset(media, attrs) do
+  def changeset(media, %{"url" => %Plug.Upload{}} = attrs) do
     media
-    |> cast(attrs, [])
+    |> cast(attrs, [:cat_id])
+    |> validate_required([:cat_id])
     |> UUID.check_uuid()
     |> cast_attachments(attrs, [:url])
   end

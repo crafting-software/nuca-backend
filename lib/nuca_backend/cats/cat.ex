@@ -12,7 +12,7 @@ defmodule NucaBackend.Cats.Cat do
     field :hotspot_id, Ecto.UUID
     field :is_imported, :boolean, default: false
     field :is_sterilized, :boolean, default: false
-    has_many :media, CatPicture, on_delete: :delete_all
+    has_many :media, CatPicture, on_replace: :delete
     field :notes, :string
     field :raw_address, :string
     field :sex, :string
@@ -36,7 +36,6 @@ defmodule NucaBackend.Cats.Cat do
       :hotspot_id,
       :is_imported
     ])
-    |> cast_assoc(:media, with: &CatPicture.changeset/2)
     |> validate_required([:sex, :is_sterilized, :hotspot_id, :is_imported])
     |> validate_inclusion(:sex, ["M", "F"])
   end

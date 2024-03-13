@@ -14,18 +14,20 @@ defmodule NucaBackendWeb.CatController do
   end
 
   def create(conn, cat_params) do
-    params = Map.put(
-      cat_params,
-      "media",
-      Upload.format_uploads(
+    params =
+      Map.put(
         cat_params,
+        "media",
+        Upload.format_uploads(
+          cat_params,
           from: "media",
           formatter: fn entry -> %{"url" => entry} end
+        )
       )
-    )
 
     with {:ok, %Cat{} = cat} <- Cats.create_cat(params) do
       Enum.each(params["media"], fn media -> Upload.delete_temp_file(media["url"].filename) end)
+
       conn
       |> put_status(:created)
       |> put_resp_header("location", Routes.cat_path(conn, :show, cat))
@@ -39,9 +41,20 @@ defmodule NucaBackendWeb.CatController do
   end
 
   def update(conn, cat_params) do
-    cat = Cats.get_cat!(cat_params["id"])
+    params =
+      Map.put(
+        cat_params,
+        "media",
+        Upload.format_uploads(
+          cat_params,
+          from: "media",
+          formatter: fn entry -> %{"url" => entry} end
+        )
+      )
 
-    with {:ok, %Cat{} = cat} <- Cats.update_cat(cat, cat_params) do
+    cat = Cats.get_cat!(params["id"])
+
+    with {:ok, %Cat{} = cat} <- Cats.update_cat(cat, params) do
       render(conn, "show.json", cat: cat)
     end
   end
