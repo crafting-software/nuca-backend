@@ -18,16 +18,6 @@ defmodule NucaBackendWeb.Upload do
   end
 
   def to_upload(%{"file" => "data:image/png;base64," <> base64_data}) do
-    # decoded_data = Base.decode64!(base64_data)
-    # file_name = "#{Ecto.UUID.generate()}.png"
-    # file_path = "#{Application.get_env(:nuca_backend, :local_temp_dir)}/#{file_name}"
-    # :ok = File.write(file_path, decoded_data)
-
-    # %Plug.Upload{
-    #   content_type: "image/png",
-    #   filename: file_name,
-    #   path: file_path
-    # }
     upload_helper("image/png", base64_data)
   end
 

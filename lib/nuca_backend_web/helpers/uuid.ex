@@ -5,9 +5,9 @@ defmodule NucaBackendWeb.UUID do
     case get_field(changeset, field) do
       nil ->
         force_change(changeset, field, Ecto.UUID.generate())
+
       _ ->
         changeset
     end
   end
-
 end

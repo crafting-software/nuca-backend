@@ -18,10 +18,10 @@ defmodule NucaBackendWeb.HotspotController do
     case Hotspots.create_hotspot(hotspot_params) do
       {:ok, hotspot} ->
         render(conn, "hotspot_details.json", hotspot: hotspot)
+
       {:error, %Ecto.Changeset{} = changeset} ->
         send_resp(conn, 400, "invalid data for hotspot creation")
-   end
-
+    end
   end
 
   def show(conn, %{"id" => id}) do
