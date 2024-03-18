@@ -22,6 +22,12 @@ defmodule NucaBackendWeb.Endpoint do
     gzip: false,
     only: ~w(assets fonts images favicon.ico robots.txt)
 
+  plug Plug.Static,
+    at: "/uploads",
+    from: Path.expand("./uploads"),
+    gzip: false,
+    only: ~w(images)
+
   # Code reloading can be explicitly enabled under the
   # :code_reloader configuration of your endpoint.
   if code_reloading? do

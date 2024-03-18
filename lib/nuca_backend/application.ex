@@ -33,4 +33,15 @@ defmodule NucaBackend.Application do
     NucaBackendWeb.Endpoint.config_change(changed, removed)
     :ok
   end
+
+  @impl true
+  def start_phase(:create_temp_folder_if_no_exists, :normal, phase_args) do
+    temp_folder = System.get_env("NUCA_BACKEND_UPLOADS_TEMP_FOLDER") || "uploads_temp"
+
+    if not File.exists?(temp_folder) do
+      File.mkdir!(temp_folder)
+    end
+
+    :ok
+  end
 end
