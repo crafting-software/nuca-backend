@@ -4,6 +4,7 @@ defmodule NucaBackend.Cats do
   alias NucaBackend.Repo
 
   alias NucaBackend.Cats.{Cat, Media.CatPicture}
+  alias NucaBackend.Users.User
 
   def list_cat do
     Repo.all(Cat) |> Repo.preload([:captured_by])
@@ -57,7 +58,23 @@ defmodule NucaBackend.Cats do
                     %CatPicture{} = picture -> picture
                   end)
             }} do
-      {:ok, cat}
+
+      operation_result =
+        if cat.capturer_id do
+          updated_capturer = Map.get(attrs, "capturedBy")
+          %{cat | captured_by: %User {
+            email: Map.get(updated_capturer, "email"),
+            full_name: Map.get(updated_capturer, "full_name"),
+            inactive_since: Map.get(updated_capturer, "inactive_since"),
+            phone: Map.get(updated_capturer, "phone"),
+            role: Map.get(updated_capturer, "role"),
+            username: Map.get(updated_capturer, "username")
+          }}
+        else
+          cat
+        end
+
+      {:ok, operation_result}
     else
       {:result, {:error, changeset}} -> {:error, changeset}
       _ -> {:error, %{}}
