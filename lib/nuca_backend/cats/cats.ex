@@ -38,12 +38,14 @@ defmodule NucaBackend.Cats do
   end
 
   def update_cat(%Cat{} = cat, attrs) do
-    %{"capturer_id" => capturer_id} = attrs
-    new_capturer = Repo.get(User, capturer_id)
+    # %{"capturer_id" => capturer_id} = attrs
+    # new_capturer = Repo.get(User, capturer_id)
     processed_attrs =
       attrs
-      |> Map.new(fn {k, v} -> {String.to_atom(k), v} end)
-      |> Map.put(:captured_by, new_capturer)
+      |> Map.put("captured_by", Map.get(attrs, "capturedBy"))
+      |> Map.delete("capturedBy")
+      # |> Map.new(fn {k, v} -> {String.to_atom(k), v} end)
+      # # |> Map.put(:captured_by, new_capturer)
 
     result =
       cat
@@ -51,7 +53,7 @@ defmodule NucaBackend.Cats do
       |> Repo.update()
 
     with {:result, {:ok, cat}} <- {:result, result},
-         {:preload, cat} <- {:preload, Repo.preload(cat, [:media])},
+         {:preload, cat} <- {:preload, Repo.preload(cat, [:captured_by, :media])},
          {:media, {:ok, media}} <- {:media, save_photos(cat, attrs["media"])},
          {:match, cat} <-
            {:match,

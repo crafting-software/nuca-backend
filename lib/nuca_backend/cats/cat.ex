@@ -16,7 +16,7 @@ defmodule NucaBackend.Cats.Cat do
     field :notes, :string
     field :raw_address, :string
     field :sex, :string
-    belongs_to :captured_by, User, foreign_key: :capturer_id, on_replace: :nilify
+    belongs_to :captured_by, User, foreign_key: :capturer_id#, on_replace: :nilify
 
     timestamps()
   end
@@ -36,8 +36,8 @@ defmodule NucaBackend.Cats.Cat do
       :hotspot_id,
       :is_imported
     ])
-    |> change()
-    |> put_assoc(:captured_by, attrs.captured_by)
+    # |> change()
+    # |> put_assoc(:captured_by, attrs["captured_by"])
     |> validate_required([:sex, :is_sterilized, :hotspot_id, :is_imported])
     |> validate_inclusion(:sex, ["M", "F"])
   end
