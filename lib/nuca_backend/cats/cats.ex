@@ -38,7 +38,31 @@ defmodule NucaBackend.Cats do
   end
 
   def update_cat(%Cat{} = cat, attrs) do
-    result = cat |> Cat.changeset(attrs) |> Repo.update()
+    # new_capturer = Repo.get(User, Map.get(attrs, "capturer_id")) # (attempt 1, 2, 3)
+    # processed_attrs =
+    #   attrs
+    #   |> Map.new(fn {k, v} -> {String.to_atom(k), v} end)
+    #   |> Map.put(:captured_by, new_capturer)
+
+    # processed_attrs = # (attempt 4)
+    #   attrs
+    #   |> Map.new(fn {k, v} -> {String.to_atom(k), v} end)
+    #   |> Map.put(:captured_by, Map.get(attrs, "capturedBy"))
+
+    new_capturer =
+      Map.get(attrs, "capturer_id")
+      |> (fn x -> Repo.get(User, x) end).() # (attempt 5)
+    processed_attrs =
+      attrs
+      |> Map.new(fn {k, v} -> {String.to_atom(k), v} end)
+      |> Map.put(:captured_by, new_capturer)
+
+    result =
+      cat
+      |> Cat.changeset(processed_attrs)
+      |> Repo.update()
+    IO.inspect(attrs, label: "Cat attributes received from the front-end")
+    IO.inspect(result, label: "Updated cat")
 
     with {:result, {:ok, cat}} <- {:result, result},
          {:preload, cat} <- {:preload, Repo.preload(cat, [:captured_by, :media])},
@@ -59,22 +83,23 @@ defmodule NucaBackend.Cats do
                   end)
             }} do
 
-      operation_result =
-        if cat.capturer_id do
-          updated_capturer = Map.get(attrs, "capturedBy")
-          %{cat | captured_by: %User {
-            email: Map.get(updated_capturer, "email"),
-            full_name: Map.get(updated_capturer, "full_name"),
-            inactive_since: Map.get(updated_capturer, "inactive_since"),
-            phone: Map.get(updated_capturer, "phone"),
-            role: Map.get(updated_capturer, "role"),
-            username: Map.get(updated_capturer, "username")
-          }}
-        else
-          cat
-        end
+      # operation_result =
+      #   if cat.capturer_id do
+      #     updated_capturer = Map.get(attrs, "capturedBy")
+      #     %{cat | captured_by: %User {
+      #       email: Map.get(updated_capturer, "email"),
+      #       full_name: Map.get(updated_capturer, "full_name"),
+      #       inactive_since: Map.get(updated_capturer, "inactive_since"),
+      #       phone: Map.get(updated_capturer, "phone"),
+      #       role: Map.get(updated_capturer, "role"),
+      #       username: Map.get(updated_capturer, "username")
+      #     }}
+      #   else
+      #     cat
+      #   end
 
-      {:ok, operation_result}
+      # {:ok, operation_result}
+      {:ok, cat}
     else
       {:result, {:error, changeset}} -> {:error, changeset}
       _ -> {:error, %{}}
