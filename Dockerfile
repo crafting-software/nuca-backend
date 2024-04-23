@@ -55,4 +55,4 @@ RUN git clone https://github.com/asdf-vm/asdf.git $HOME/.asdf && \
 WORKDIR $WORK_DIR/nuca-backend
 COPY .release-tool-versions .tool-versions
 RUN source $HOME/.asdf/asdf.sh && asdf install &&  \
-      mix local.hex --force && mix local.rebar --force
+    mix local.hex --force && mix local.rebar --force
