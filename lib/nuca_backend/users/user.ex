@@ -8,7 +8,7 @@ defmodule NucaBackend.Users.User do
     field :inactive_since, :naive_datetime
     field :password_hash, :string
     field :phone, :string
-    field :role, :string
+    field :role, Ecto.Enum, values: [:volunteer, :admin]
     field :username, :string
     field :password, :string, virtual: true
 
