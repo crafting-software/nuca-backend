@@ -3,8 +3,7 @@ defmodule NucaBackend.Hotspots do
   import Ecto.Query, warn: false
   alias NucaBackend.Repo
   alias NucaBackend.Hotspots.Hotspot
-
-  alias NucaBackend.Hotspots.Hotspot
+  alias NucaBackend.Users.User
 
   def list_hotspots do
     from(h in Hotspot,
@@ -35,6 +34,10 @@ defmodule NucaBackend.Hotspots do
     hotspot
     |> Hotspot.changeset(attrs)
     |> Repo.update()
+    |> OK.flat_map(fn h ->
+      new_volunteer = Repo.get!(User, h.volunteer_id)
+      {:ok, Map.put(h, :volunteer, new_volunteer)}
+    end)
   end
 
   def delete_hotspot(%Hotspot{} = hotspot) do
