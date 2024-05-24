@@ -58,11 +58,22 @@ if config_env() == :prod do
 
   config :waffle,
     storage: Waffle.Storage.S3,
-    bucket: System.fetch_env("NUCA_S3_BUCKET"),
-    asset_host: System.fetch_env("NUCA_S3_ASSET_HOST")
+    bucket: System.fetch_env!("NUCA_S3_BUCKET"),
+    virtual_host: true
 
   config :ex_aws,
-    json_codec: Jason
+    access_key_id: System.fetch_env!("AWS_ACCESS_KEY_ID"),
+    secret_access_key: System.fetch_env!("AWS_SECRET_ACCESS_KEY"),
+    region: "eu-west-1",
+    host: "s3.eu-west-1.amazonaws.com",
+    s3: [
+      scheme: "https://",
+      host: "s3.eu-west-1.amazonaws.com",
+      region: "eu-west-1"
+    ]
+
+  config :nuca_backend,
+    local_temp_dir: System.get_env("NUCA_UPLOADS_TEMP_DIR") || "uploads_temp"
 
   # ## Using releases
   #
