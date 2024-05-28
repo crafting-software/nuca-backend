@@ -114,4 +114,23 @@ defmodule NucaBackend.Cats do
   def change_cat(%Cat{} = cat, attrs \\ %{}) do
     Cat.changeset(cat, attrs)
   end
+
+  defp filter_by_checkin_date(query, %{"check_in_date" => date}),
+    do: where(query, [cat], cat.check_in_date >= ^date)
+
+  defp filter_by_checkin_date(query, _), do: query
+
+  defp filter_by_checkout_date(query, %{"check_out_date" => date}),
+    do: where(query, [cat], cat.check_out_date <= ^date)
+
+  defp filter_by_checkout_date(query, _), do: query
+
+  def filter_cats(params) do
+    Cat
+    |> where([cat], cat.is_sterilized == true)
+    |> filter_by_checkin_date(params)
+    |> filter_by_checkout_date(params)
+    |> preload([:captured_by, :media, :hotspot])
+    |> Repo.all()
+  end
 end

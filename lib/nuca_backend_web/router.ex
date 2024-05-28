@@ -30,6 +30,7 @@ defmodule NucaBackendWeb.Router do
     pipe_through :api
 
     post "/login", AuthController, :authenticate
+    get "/report", ReportController, :index
 
     pipe_through :require_authorization
 

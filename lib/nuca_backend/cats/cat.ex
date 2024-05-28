@@ -9,7 +9,7 @@ defmodule NucaBackend.Cats.Cat do
     field :check_in_date, :date
     field :check_out_date, :date
     field :description, :string
-    field :hotspot_id, Ecto.UUID
+    belongs_to :hotspot, NucaBackend.Hotspots.Hotspot
     field :is_imported, :boolean, default: false
     field :is_sterilized, :boolean, default: false
     has_many :media, CatPicture, on_replace: :delete
