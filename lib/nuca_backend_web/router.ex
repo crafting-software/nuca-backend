@@ -30,13 +30,13 @@ defmodule NucaBackendWeb.Router do
     pipe_through :api
 
     post "/login", AuthController, :authenticate
-    get "/report", ReportController, :index
 
     pipe_through :require_authorization
 
     resources "/users", UserController
     resources "/hotspots", HotspotController
     resources "/cats", CatController
+    get "/report", ReportController, :index
   end
 
   # Enables LiveDashboard only for development
