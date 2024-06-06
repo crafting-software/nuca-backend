@@ -36,6 +36,7 @@ defmodule NucaBackendWeb.Router do
     resources "/users", UserController
     resources "/hotspots", HotspotController
     resources "/cats", CatController
+    get "/report", ReportController, :index
   end
 
   # Enables LiveDashboard only for development
