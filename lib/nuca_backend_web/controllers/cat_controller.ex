@@ -51,7 +51,6 @@ defmodule NucaBackendWeb.CatController do
           formatter: fn entry -> %{"url" => entry} end
         )
       )
-
     cat = Cats.get_cat!(params["id"])
 
     with {:ok, %Cat{} = cat} <- Cats.update_cat(cat, params) do

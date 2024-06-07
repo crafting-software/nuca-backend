@@ -4,6 +4,7 @@ defmodule NucaBackend.Cats do
   alias NucaBackend.Repo
 
   alias NucaBackend.Cats.{Cat, Media.CatPicture}
+  alias NucaBackend.Users.{User}
 
   def list_cat do
     Repo.all(Cat) |> Repo.preload([:captured_by])
@@ -38,16 +39,19 @@ defmodule NucaBackend.Cats do
 
   def update_cat(%Cat{} = cat, attrs) do
     result = cat |> Cat.changeset(attrs) |> Repo.update()
+    new_capturer_id = Map.get(attrs, "capturer_id")
+    new_capturer = if !is_nil(new_capturer_id), do: Repo.get(User, new_capturer_id), else: nil
 
-    with {:result, {:ok, cat}} <- {:result, result},
-         {:preload, cat} <- {:preload, Repo.preload(cat, [:captured_by, :media])},
-         {:media, {:ok, media}} <- {:media, save_photos(cat, attrs["media"])},
-         {:match, cat} <-
+    with {:result, {:ok, new_cat}} <- {:result, result},
+         {:preload, cat_with_preloaded_media} <- {:preload, Repo.preload(new_cat, [:media])},
+         {:cat_with_new_capturer, cat_with_new_capturer} <- {:cat_with_new_capturer, %{cat_with_preloaded_media | captured_by: new_capturer, capturer_id: new_capturer_id}},
+         {:media, {:ok, media}} <- {:media, save_photos(cat_with_new_capturer, attrs["media"])},
+         {:match, cat_with_new_capturer} <-
            {:match,
             %{
-              cat
+              cat_with_new_capturer
               | media:
-                  (media.new ++ cat.media)
+                  (media.new ++ cat_with_preloaded_media.media)
                   |> Enum.filter(fn
                     {status, _media} -> status == :ok
                     media -> media
@@ -57,7 +61,7 @@ defmodule NucaBackend.Cats do
                     %CatPicture{} = picture -> picture
                   end)
             }} do
-      {:ok, cat}
+      {:ok, cat_with_new_capturer}
     else
       {:result, {:error, changeset}} -> {:error, changeset}
       _ -> {:error, %{}}
