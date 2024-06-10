@@ -35,7 +35,7 @@ defmodule NucaBackend.Hotspots do
     |> Hotspot.changeset(attrs)
     |> Repo.update()
     |> OK.flat_map(fn h ->
-      new_volunteer = Repo.get!(User, h.volunteer_id)
+      new_volunteer = if h.volunteer_id != nil, do: Repo.get!(User, h.volunteer_id), else: nil
       {:ok, Map.put(h, :volunteer, new_volunteer)}
     end)
   end
